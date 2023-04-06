@@ -26,11 +26,8 @@ $("#searchBtn").on("click", function () {
     // convert given temp from Calvin to Celsius to Fahrenheit
     var cTemp = (response.main.temp - 273.15) * 1.8 + 32;
 
-    // $.get(URL, callback)
-    // console.log(response);
-
     conditions(response);
-    //   5 day
+    day5();
     makeList();
   });
 });
@@ -75,4 +72,44 @@ function conditions(response) {
   cardBody.append(place, temperature, humidity, wind);
   card.append(cardBody);
   $("#currentCity").append(card);
+}
+
+function day5() {
+  var date = new Date();
+
+  $.ajax({
+    url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey,
+    method: "GET",
+  }).then(function (response) {
+    $("#forecast").empty();
+
+    // variable for response.list
+    let results = response.list;
+
+    for (i = 0; i < 5; i++) {
+      var card = $("<div>").addClass("col-md-2 ml-4 bg-primary text-white");
+      var cardBody = $("<div>").addClass("card-body p-3 forecastBody");
+      var cardDate = $("<p>")
+        .addClass("card-title")
+        .text(`${textMo}-${dateAdv}`);
+
+      var temperature = $("<p>")
+        .addClass("card-text forecastTemp")
+        .text(`Temperature: ${forTemp} °F`);
+      var humidity = $("<p>")
+        .addClass("card-text forecastHumidity")
+        .text(`Humidity: ${results[i].main.humidity}%`);
+
+      var image = $("<img>").attr(
+        "src",
+        "https://openweathermap.org/img/w/" +
+          results[i].weather[0].icon +
+          ".png"
+      );
+
+      cardBody.append(cardDate, image, temperature, humidity);
+      card.append(cardBody);
+      $("#forecast").append(card);
+    }
+  });
 }
