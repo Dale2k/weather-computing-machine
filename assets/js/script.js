@@ -87,6 +87,23 @@ function day5() {
     let results = response.list;
 
     for (i = 0; i < 5; i++) {
+      var forTemp = (results[i].main.temp - 273.15) * 1.8 + 32;
+      var forTemp = Math.floor(forTemp);
+      const d = new Date();
+      let text = d.toDateString();
+      console.log(text);
+
+      let textMo = text.substring(4, 7);
+      console.log(textMo);
+
+      let textDay = text.substring(8, 11);
+      console.log(textDay);
+
+      let textNum = +textDay;
+      console.log(textNum);
+      let dateAdv = textNum + i;
+      console.log(`${textMo}-${dateAdv}`);
+
       var card = $("<div>").addClass("col-md-2 ml-4 bg-primary text-white");
       var cardBody = $("<div>").addClass("card-body p-3 forecastBody");
       var cardDate = $("<p>")
