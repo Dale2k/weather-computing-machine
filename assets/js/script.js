@@ -1,8 +1,27 @@
 // endpoint: api.openweathermap.org
 // API Call example: api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=0c0fef2bed24cf16dda67df2902d8e04
 
+let cities = [];
+var searchBtnEl = document.querySelector(".search-button");
+var inputEl = document.querySelector(".input");
+var citiesListEl = document.querySelector(".cities-list"); //local storage on page
+// Sets the cityName in localStorage  ----------
+var cityName = localStorage.getItem("cityNameStore"); // set var and sets local
+city = $("#setCity").val();
+
 // api key
 var apiKey = "&appid=0c0fef2bed24cf16dda67df2902d8e04";
+// Sets the input value in localStorage
+function cityData() {
+  localStorage.setItem("cityNameStore", city);
+}
+
+// Append the search input from localStorage to the cities list
+for (var i = 0; i < localStorage.length; i++) {
+  $(citiesListEl).append(
+    "<p>" + localStorage.getItem(localStorage.key(i)) + "</p>"
+  );
+}
 
 $("#searchBtn").on("click", function () {
   $("#weekly").addClass("show"); //
@@ -11,9 +30,7 @@ $("#searchBtn").on("click", function () {
   city = $("#setCity").val();
 
   //API string
-  // var queryUrl =
-  //   "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}" +
-  //   apiKey;
+
   var queryUrl =
     "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
 
@@ -25,7 +42,7 @@ $("#searchBtn").on("click", function () {
   }).then(function (response) {
     // convert given temp from Calvin to Celsius to Fahrenheit
     var cTemp = (response.main.temp - 273.15) * 1.8 + 32;
-
+    cityData();
     conditions(response);
     day5();
     makeList();
@@ -130,3 +147,5 @@ function day5() {
     }
   });
 }
+
+searchBtnEl.addEventListener("click", cityData);
