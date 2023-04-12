@@ -1,4 +1,3 @@
-#top{
-color: aquamarine;
-text-align: center;
+.container-fluid{
+    background-color:blue ;color: white
 };

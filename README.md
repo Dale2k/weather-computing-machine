@@ -47,6 +47,5 @@ x THEN I am again presented with current and future conditions for that city
 
 ## Mock-Up
 
-demo
-[Demonstration of application Functionality](https://drive.google.com/file/d/1CIdqicGdE5bAdz1cnoExd6Ast9VeSfQA/view)
+
 
