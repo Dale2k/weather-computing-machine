@@ -86,7 +86,7 @@ function forecast(cityid) {
         response.list[(i + 1) * 7].dt * 1000
       ).toLocaleDateString();
       var iconcode = response.list[(i + 1) * 7].weather[0].icon;
-      var iconurl = "https://openweathermap.org/img/wn/" + iconcode + ".png";
+      var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
       var tempA = response.list[(i + 1) * 7].main.temp;
       var tempF = ((tempA - 273.5) * 1.8 + 32).toFixed(0);
       var humidity = response.list[(i + 1) * 7].main.humidity;
