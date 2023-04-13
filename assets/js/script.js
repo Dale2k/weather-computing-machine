@@ -52,7 +52,7 @@ function currentWeather(city) {
     forecast(response.id);
     if (response.id !== "null") {
       nCity = JSON.parse(localStorage.getItem("cityname"));
-      console.log(nCity);
+
       if (nCity == null) {
         nCity = [];
         nCity.push(city);
